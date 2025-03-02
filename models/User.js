@@ -32,7 +32,9 @@ const userSchema = new mongoose.Schema({
     required: true,
     enum: roles,
     default: "user",
-  }, //! SI ESTO LO DEJAMOS ASÍ, CUANDO HAGAMOS UNA PETICIÓN NOS DEVOLVERÁ TODA LA INFORMACIÓN QUE HAY EN MONGODB, COMO EL __V, EL _ID, ETC. POR LO QUE PODEMOS ELEGIR QUE QUEREMOS SELECCIONAR DE LA BASE DE DATOS CON:
+  },
+   //! SI ESTO LO DEJAMOS ASÍ, CUANDO HAGAMOS UNA PETICIÓN NOS DEVOLVERÁ TODA LA INFORMACIÓN QUE HAY EN MONGODB, COMO EL __V, EL _ID, ETC. POR LO QUE PODEMOS ELEGIR QUE QUEREMOS SELECCIONAR DE LA BASE DE DATOS CON:
+},{
   toJSON: {
     //? ESTO ES PARA QUE NO SE MUESTRE EL PASSWORD EN EL JSON, O EL __V o el _ID. Lo que nosotros elijamos. Podemos filtrar
     transform: function (doc, ret) {
@@ -55,7 +57,7 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.index({ id: 1 }, { email: 1 }); //PARA QUE EN LA BASE DE DATOS SE BUSQUE PRINCIPALMENTE POR ID Y EMAIL
+userSchema.index({ id: 1, email: 1 }); //PARA QUE EN LA BASE DE DATOS SE BUSQUE PRINCIPALMENTE POR ID Y EMAIL
 
 const User = mongoose.model("User", userSchema);
 

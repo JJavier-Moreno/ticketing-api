@@ -8,15 +8,16 @@ const DB_URL =
     ? "mongodb://localhost:27017/ticketing-db-test"
     : process.env.MONGO_URL || "mongodb://localhost:27017/ticketing-db";
 
-const connectDB = () => {
+const connectDB = async() => {
   try {
-    mongoose
+    await mongoose
       .connect(DB_URL)
       .then(() => {
         console.log(`Conectado a la base de datos ${DB_URL}`);
       })
       .catch((error) => {
         console.log(error);
+        process.exit(1);
       });
   } catch (error) {
     console.log(error);

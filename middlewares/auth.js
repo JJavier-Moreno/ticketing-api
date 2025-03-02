@@ -20,7 +20,7 @@ const auth = (req, res, next) => {
         req.user = payload; //Le añadimos al objeto req la propiedad user con el valor payload
         next();
     }catch(error){
-        return res.status(403).json({
+        return res.status(400).json({
             status: "fail",
             message: "Invalid token",
         })

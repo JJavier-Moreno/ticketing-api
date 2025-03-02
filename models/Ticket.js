@@ -36,7 +36,9 @@ const ticketSchema = new mongoose.Schema({
     description: {
         type: String,
          required: true,
-    },
+    }
+},
+{
     toJSON: {
         transform: function(doc, ret){
             delete ret.__v;
@@ -46,7 +48,7 @@ const ticketSchema = new mongoose.Schema({
     }
 });
 
-ticketSchema.index({id: 1}, {user: 1});
+ticketSchema.index({id: 1, user: 1});
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
 
