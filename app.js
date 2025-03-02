@@ -6,11 +6,12 @@ import userRouter from "./routes/userRoutess.js";
 
 const app = express();
 
+app.use(express.json());
+
 dotenv.config();
 
 connectDB();
 
-app.use(express.json());
 app.use(morgan("dev"));
 app.use("/api/user", userRouter);
 
