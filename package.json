@@ -12,9 +12,11 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongoose": "^8.11.0"
+    "mongoose": "^8.11.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0"
