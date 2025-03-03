@@ -5,9 +5,17 @@ import admin from  "../middlewares/admin.js";
 
 const router = express.Router();
 
+//http://localhost:300/api/tickets?page=1&pageSize=20
 router.get("/", auth ,async (req, res) => {
+
+    const page = req.query.page || 1;
+    const pageSize = req.query.pageSize || 10;
+
+    const total = await Ticket.countDocuments();
+
+
   try {
-    const tickets = await Ticket.find({});
+    const tickets = await Ticket.find({}).skip((page-1)*pageSize).limit(pageSize);
 
     if (!tickets) {
       return res.status(400).json({
@@ -19,6 +27,9 @@ router.get("/", auth ,async (req, res) => {
     res.status(200).json({
       status: "success",
       tickets,
+      pages: Math.ceil(total/pageSize),
+      currentPage: page,
+      page
     });
   } catch (error) {
     res.status(500).send({
