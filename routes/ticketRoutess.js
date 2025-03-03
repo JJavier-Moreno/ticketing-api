@@ -1,5 +1,6 @@
 import express from "express";
 import Ticket from "../models/ticket.js";
+import auth from "../middlewares/auth.js";
 
 const router = express.Router();
 
@@ -52,7 +53,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth , async (req, res) => {
   const { userId, title, description, priority, state } = req.body;
 
   const ticket = new Ticket({
