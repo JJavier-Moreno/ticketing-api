@@ -1,10 +1,11 @@
 import express from "express";
 import Ticket from "../models/ticket.js";
 import auth from "../middlewares/auth.js";
+import admin from  "../middlewares/admin.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", auth ,async (req, res) => {
   try {
     const tickets = await Ticket.find({});
 
@@ -27,7 +28,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth ,async (req, res) => {
   const id = req.params.id;
   
   try {
@@ -53,11 +54,11 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", auth , async (req, res) => {
+router.post("/", [auth, admin], async (req, res) => {
   const { userId, title, description, priority, state } = req.body;
 
   const ticket = new Ticket({
-    user: userId,
+    user: req.user._id,
     title,
     description,
     priority,
@@ -79,7 +80,7 @@ router.post("/", auth , async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, admin, async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
 
@@ -109,11 +110,10 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params.id;
-
+router.delete("/:id",auth, admin, async (req, res) => {
+  const { id } = req.params;
   try {
-    const ticket = await Ticket.findByIdAndDelete(id);
+    const ticket = await Ticket.findOneAndDelete({id});
 
     if (!ticket) {
       return res.status(404).json({
