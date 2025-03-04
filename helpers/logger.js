@@ -1,6 +1,6 @@
 import winston from "winston";
 
-const logger = createLogger({
+const logger = winston.createLogger({
     level: "error",
     format: winston.format.combine( //Formato de los logs
         winston.format.prettyPrint(), //Se le da un color al log
