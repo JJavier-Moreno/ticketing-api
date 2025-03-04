@@ -1,2 +1,0 @@
-GET http://localhost:3000/api/tickets/498b3195-926c-4954-a618-4eadbb450f3c HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M0ZWU4Njk4NmJjNDkzOTUyNDUwYWEiLCJyb2wiOiJ1c2VyIiwiaWF0IjoxNzQxMDA5NTE3LCJleHAiOjE3NDEwMTMxMTd9.M0zJKEM8wlnyyNcrO5xu5SH46eGgTjqxSHcbO-ZzRZs
