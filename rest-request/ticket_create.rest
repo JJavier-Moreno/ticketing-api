@@ -1,0 +1,11 @@
+POST http://localhost:3000/api/tickets/  HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2M2MDBiMzFhNGFjYzc1YWYzOTM0NTkiLCJyb2wiOiJhZG1pbiIsImlhdCI6MTc0MTAyOTU1NSwiZXhwIjoxNzQxMDMzMTU1fQ.hLO790M-rPfBIhRDtbH-B7GYbPAPYo7CQdNUhD3sX1A
+Content-Type: application/json
+
+{
+    "title" : "Ticket #12",
+    "description" : "Ticket de prueba 12",
+    "priority" : "high",
+    "state": "in-progress"
+}
+

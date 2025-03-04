@@ -5,10 +5,11 @@ dotenv.config();
 
 const DB_URL =
   process.env.NODE_ENV === "test"
-    ? "mongodb://localhost:27017/ticketing-db-test"
+    ? process.env.MONGO_URL_TEST
     : process.env.MONGO_URL || "mongodb://localhost:27017/ticketing-db";
 
 const connectDB = async() => {
+  console.log(DB_URL);
   try {
     await mongoose
       .connect(DB_URL)

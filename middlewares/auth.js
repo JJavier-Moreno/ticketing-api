@@ -5,8 +5,18 @@ dotenv.config();
 
 const auth = (req, res, next) => {
 
-    const header = req.header("Authorization") || [];
-    const token = header.split(" ")[1];
+    const authHeader = req.headers["authorization"];
+
+    if (!authHeader) {
+      return res.status(401).json({ message: "Authorization header is missing" });
+    }
+  
+    if (typeof authHeader !== "string") {
+      return res.status(400).json({ message: "Authorization header is not a string" });
+    }
+  
+    const token = authHeader.split(" ")[1]; // Esperamos que el formato sea "Bearer <token>"
+  
 
     if(!token){
         return res.status(401).json({

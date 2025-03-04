@@ -4,7 +4,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "SET NODE_ENV=test&& jest",
     "start": "SET NODE_ENV=prod&& node server.js",
     "dev": "SET NODE_ENV=dev&& node --watch server.js"
   },

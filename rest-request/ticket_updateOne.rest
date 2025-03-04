@@ -1,0 +1,10 @@
+PUT http://localhost:3000/api/tickets/498b3195-926c-4954-a618-4eadbb450f3c  HTTP/1.1
+Content-Type: application/json
+
+{
+    "userId" : "88ffc745-7285-4098-8707-60fd8280d379",
+    "title" : "Ticket #4",
+    "description" : "Ticket de prueba 2 actualizado con PUT",
+    "priority" : "high",
+    "state" : "in-progress"
+}
