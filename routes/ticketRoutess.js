@@ -2,41 +2,18 @@ import express from "express";
 import Ticket from "../models/ticket.js";
 import auth from "../middlewares/auth.js";
 import admin from  "../middlewares/admin.js";
+import filter from "../middlewares/filter.js";
+import pagination from "../middlewares/pagination.js";
 
 const router = express.Router();
 
 //http://localhost:300/api/tickets?page=1&pageSize=20
-router.get("/", auth ,async (req, res) => {
-
-    const page = req.query.page || 1;
-    const pageSize = req.query.pageSize || 10;
-
-    const total = await Ticket.countDocuments();
-
-
-  try {
-    const tickets = await Ticket.find({}).skip((page-1)*pageSize).limit(pageSize);
-
-    if (!tickets) {
-      return res.status(400).json({
-        status: "fail",
-        message: "No tickets found",
-      });
-    }
+router.get("/", [auth, filter, pagination(Ticket)], async (req, res) => {
 
     res.status(200).json({
       status: "success",
-      tickets,
-      pages: Math.ceil(total/pageSize),
-      currentPage: page,
-      page
+      tickets: req.paginatedResults
     });
-  } catch (error) {
-    res.status(500).send({
-      status: "fail",
-      message: error.message,
-    });
-  }
 });
 
 router.get("/:id", auth ,async (req, res) => {
